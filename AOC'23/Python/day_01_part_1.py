@@ -1,4 +1,4 @@
-file_path = '../Questions/input_01.txt'
+file_path = '../Questions/day_01_input_1.txt'
 
 with open(file_path, 'r') as file:
 	lines = file.readlines()
