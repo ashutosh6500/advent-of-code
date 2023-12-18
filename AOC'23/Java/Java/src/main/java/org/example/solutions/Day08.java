@@ -7,6 +7,24 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Day08 {
+    public static long gcd(long num1, long num2)
+    {
+        if (num2 == 0)
+            return num1;
+        return gcd(num2, num1 % num2);
+    }
+
+    public static long lcm_of_array(ArrayList<Long> arr)
+    {
+        long lcm = arr.get(0);
+        for (long i = 1; i < arr.size(); i++) {
+            long num1 = lcm;
+            long num2 = arr.get((int)i);
+            long gcd_val = gcd(num1, num2);
+            lcm = (lcm * arr.get((int)i)) / gcd_val;
+        }
+        return lcm;
+    }
     public static void main(String [] args) throws java.lang.Exception {
         File file = new File("E:\\advent-of-code\\AOC'23\\Inputs\\input_08.txt");
         BufferedReader br = new BufferedReader(new FileReader(file));
@@ -55,8 +73,29 @@ public class Day08 {
         }
         System.out.println(cnt);
         */
-
-         //code for part two
+        //lcm way for part 2
+        ArrayList<Long> lcmArray = new ArrayList<>();
+        for(String h : partTwoStrArr){
+            cnt = 0;
+            String currStr=h;
+            while(true){
+                //System.out.println(currStr);
+                if(currStr.charAt(2) == 'Z')
+                    break;
+                if(i>=sequence.length())
+                    i=0;
+                if(sequence.charAt((int)i) == 'L')
+                    currStr = mappings.get(currStr).get(0);
+                else
+                    currStr = mappings.get(currStr).get(1);
+                i++;
+                cnt++;
+            }
+            lcmArray.add(cnt);
+        }
+        System.out.println(lcm_of_array(lcmArray));
+        /*
+         //code for part two (failed due to TLE)
         long check =0;
         boolean flg = true;
         while(flg){
@@ -87,5 +126,7 @@ public class Day08 {
             i++;
         }
         System.out.println(cnt);
+        */
+
     }
 }
